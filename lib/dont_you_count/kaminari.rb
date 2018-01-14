@@ -1,8 +1,10 @@
-# Prevent long running select count queries for choosen tables, and preserve the oryginal behaviour for other tables
+# Prevent long running select count queries for choosen tables, and preserve the original behaviour for other tables
 module Kaminari
   module PageScopeMethods
     def total_count(column_name = :all, options = {})
-      if ActiveAdmin.application.dont_count.include?(entry_name.titleize.gsub(" ", "").tableize)
+      if self.is_a?(Kaminari::PaginatableArray)
+        @total_count ||= @_original_array.length
+      elsif ActiveAdmin.application.dont_count.include?(entry_name.titleize.gsub(" ", "").tableize)
         2000000
       else
         @total_count ||= begin
