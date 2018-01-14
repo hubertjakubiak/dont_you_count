@@ -2,7 +2,7 @@
 module Kaminari
   module PageScopeMethods
     def total_count(column_name = :all, options = {})
-      if ActiveAdmin.application.dont_count.include?(entry_name)
+      if ActiveAdmin.application.dont_count.include?(entry_name.titleize.gsub(" ", "").tableize)
         2000000
       else
         @total_count ||= begin
