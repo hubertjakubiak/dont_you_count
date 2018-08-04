@@ -2,6 +2,7 @@
 module Kaminari
   module PageScopeMethods
     def total_count(column_name = :all, options = {})
+      binding.pry
       if self.is_a?(Kaminari::PaginatableArray)
         @total_count ||= @_original_array.length
       elsif ActiveAdmin.application.dont_count.include?(entry_name.titleize.gsub(" ", "").tableize)
