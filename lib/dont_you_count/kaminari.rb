@@ -1,6 +1,6 @@
 # Prevent long running select count queries for choosen tables, and preserve the original behaviour for other tables
 module Kaminari
-  module PageScopeMethods
+  module ActiveRecordRelationMethods
     def total_count(column_name = :all, options = {})
       if self.is_a?(Kaminari::PaginatableArray)
         @total_count ||= @_original_array.length
